@@ -36,7 +36,7 @@ public class Main {
 
         int success = 0;
         //reads the File from the command line
-        if((success = main.readFile(testFile, 1)) != 0){
+        if((success = main.readFile(testFile, 2)) != 0){
             System.out.println("read success!");
         }else{
             System.err.println("read not successful" + testFile);
@@ -45,10 +45,15 @@ public class Main {
 
     }
 
+
+
     /**
+     * @File readFile
+     * @int function
+     *
      * readFile - reads the file specified in the args of the method and sets them converts them to information for the
      * program to receive.
-     * @return
+     * @return (condition code)
      */
     private int readFile(File readFile, int function){
         BufferedReader br = null;
