@@ -1,6 +1,7 @@
 package com.raphaelmiller;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class Main {
 
@@ -15,6 +16,10 @@ public class Main {
 
     //test file
     static File testFile = new File("/home/raphael/IdeaProjects/Hill Cipher/test_cipher");
+    static File testPhrase = new File("/home/raphael/IdeaProjects/Hill Cipher/keyphrase");
+
+    private int[] cipherCoderMatrix;
+    private String phrase;
 
     public static void main(String[] args) {
         Main main = new Main();
@@ -36,15 +41,41 @@ public class Main {
 
         int success = 0;
         //reads the File from the command line
-        if((success = main.readFile(testFile, 2)) != 0){
+        if((success = main.readFile(testFile, 1)) != 0){
             System.out.println("read success!");
         }else{
             System.err.println("read not successful" + testFile);
         }
 
+        if((success = main.readFile(testPhrase, 2)) != 0){
+            System.out.println("read success!");
+        }else{
+            System.err.println("read not successful" + testFile);
+        }
+
+        //System.out.println(main.getCipherCoderMatrix()[2]);
+        char[] currentPhrase = main.parsePhrase(main.getPhrase());
 
     }
 
+    private char[] parsePhrase(String phrase) {
+        char[] phraseBlock = new char[3];
+
+        for(int x = 0; x < phraseBlock.length; x++){
+            if(phrase.charAt(x) == ' '){
+                x++;
+            }
+            phraseBlock[x] = phrase.charAt(x);
+        }
+
+        if(phrase.length() > phraseBlock.length){
+            parsePhrase(phrase.substring(phraseBlock.length));
+        }
+
+
+
+        return phraseBlock;
+    }
 
 
     /**
@@ -57,21 +88,27 @@ public class Main {
      */
     private int readFile(File readFile, int function){
         BufferedReader br = null;
+        Scanner s = null;
 
-        //todo message and cipher have to be differentiated, one is int one is read as String.
+        /* todo message and cipher have to be differentiated, one is int one is read as String. */
 
         switch (function) {
             case 1:
+                int[] matrix = new int[81];
                 try {
-                    int matrix;
-
-                    //todo not parsing correctly :/
-                    br = new BufferedReader(new FileReader(readFile));
-
-                    while ((matrix = br.read()) != -1) {
-                        System.out.println(matrix);
+                    s = new Scanner(readFile);
+                    int i = 0;
+                    while (s.hasNext()) {
+                        if (s.hasNextInt()){
+                            matrix[i] = s.nextInt();
+                            setCipherCoderMatrix(matrix);
+                            System.out.println(matrix[i]);
+                        } else{
+                            s.next();
+                        }
+                        i++;
                     }
-                } catch (IOException e) {
+                } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
                 return 1;
@@ -84,11 +121,33 @@ public class Main {
                     while ((currentLine = br.readLine()) != null) {
                         System.out.println(currentLine);
                     }
+                    setPhrase(currentLine);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
                 return 1;
         }
         return 0;
+    }
+
+    //todo method that takes aggrigated values and does matrix multiplication
+
+    //todo method that converts numerical values to their letter counterparts
+
+
+    public int[] getCipherCoderMatrix() {
+        return cipherCoderMatrix;
+    }
+
+    public void setCipherCoderMatrix(int[] cipherCoderMatrix) {
+        this.cipherCoderMatrix = cipherCoderMatrix;
+    }
+
+    public String getPhrase() {
+        return phrase;
+    }
+
+    public void setPhrase(String phrase) {
+        this.phrase = phrase;
     }
 }
