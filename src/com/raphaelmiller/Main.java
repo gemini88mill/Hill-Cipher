@@ -26,9 +26,15 @@ public class Main {
         Main main = new Main();
 
         String[] phrase = null;
+        int matrixSize;
+        int[][] place = {{6,24,1},
+                         {13,16,10},
+                         {20,17,15}};
+        int[] testb = {0,2,19};
 
         try {
-            int matrixSize = main.loadCipher(testFile);
+
+            matrixSize = main.loadCipher(testFile);
             phrase = main.loadString(testPhrase, matrixSize);
 
 
@@ -38,6 +44,8 @@ public class Main {
 
         int[] strNum = main.convertToInt("thebookisonthetable");
         System.out.println(strNum[7]);
+
+        main.matrixMultipication(place, testb, 3);
 
     }
 
@@ -94,6 +102,28 @@ public class Main {
     }
 
     /*Method to do matrix multiplication*/
+
+    /**
+     * matrixMultiplication - collects two matrices and adds them together 
+     *
+     * @param aMatrix
+     * @param bMatrix
+     * @param matrixSize
+     * @return int[]
+     */
+    private int[] matrixMultipication(int[][] aMatrix, int[] bMatrix, int matrixSize){
+        int[] result = new int[matrixSize];
+
+            for (int y = 0; y < matrixSize; y++) {
+                for (int x = 0; x < matrixSize; x++) {
+                    result[y] = result[y] + (aMatrix[y][x] * bMatrix[x]);
+                    result[y] = result[y] % 26;
+                }
+            }
+
+        return result;
+    }
+
     /*Method to display output*/
     /*switch from integer to char representation based on Hill Cipher guidelines*/
 
