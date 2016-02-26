@@ -1,7 +1,8 @@
 package com.raphaelmiller;
 
 import java.io.*;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -24,130 +25,105 @@ public class Main {
     public static void main(String[] args) {
         Main main = new Main();
 
-        //System.out.println("hello world");
+        String[] phrase = null;
 
-        //accepts the new file name
-        if(0 < args.length) {
-            //if statement checks for argument existence
-            //cipher = new File(args[0]);
-            //message = new File(args[1]);
+        try {
+            int matrixSize = main.loadCipher(testFile);
+            phrase = main.loadString(testPhrase, matrixSize);
 
-            //File's have been accepted.
-        } else{
-            //if no arguments exist, then exit program...
-            System.err.println("Invalid Argument Count:" + args.length);
-            System.exit(15);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        int success = 0;
-        //reads the File from the command line
-        if((success = main.readFile(testFile, 1)) != 0){
-            System.out.println("read success!");
-        }else{
-            System.err.println("read not successful" + testFile);
-        }
-
-        if((success = main.readFile(testPhrase, 2)) != 0){
-            System.out.println("read success!");
-        }else{
-            System.err.println("read not successful" + testFile);
-        }
-
-        //System.out.println(main.getCipherCoderMatrix()[2]);
-        char[] currentPhrase = main.parsePhrase(main.getPhrase());
+        int[] strNum = main.convertToInt("thebookisonthetable");
+        System.out.println(strNum[7]);
 
     }
 
-    private char[] parsePhrase(String phrase) {
-        char[] phraseBlock = new char[3];
-
-        for(int x = 0; x < phraseBlock.length; x++){
-            if(phrase.charAt(x) == ' '){
-                x++;
-            }
-            phraseBlock[x] = phrase.charAt(x);
-        }
-
-        if(phrase.length() > phraseBlock.length){
-            parsePhrase(phrase.substring(phraseBlock.length));
-        }
-
-
-
-        return phraseBlock;
-    }
-
+    /*Method to load files to String*/
 
     /**
-     * @File readFile
-     * @int function
+     * loadString - loads the specified file to be encrypted in order to process for encryption
+     * @param file
+     * @param matrixSize
      *
-     * readFile - reads the file specified in the args of the method and sets them converts them to information for the
-     * program to receive.
-     * @return (condition code)
      */
-    private int readFile(File readFile, int function){
-        BufferedReader br = null;
-        Scanner s = null;
+    private String[] loadString(File file, int matrixSize) throws IOException {
 
-        /* todo message and cipher have to be differentiated, one is int one is read as String. */
+        String phrase;
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        phrase = br.readLine();
+        String formattedPhrase = phrase.replaceAll("\\s", "");
+        return splitStringEvery(formattedPhrase, matrixSize);
 
-        switch (function) {
-            case 1:
-                int[] matrix = new int[81];
-                try {
-                    s = new Scanner(readFile);
-                    int i = 0;
-                    while (s.hasNext()) {
-                        if (s.hasNextInt()){
-                            matrix[i] = s.nextInt();
-                            setCipherCoderMatrix(matrix);
-                            System.out.println(matrix[i]);
-                        } else{
-                            s.next();
-                        }
-                        i++;
-                    }
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                return 1;
-            case 2:
-                try {
-                    String currentLine;
 
-                    br = new BufferedReader(new FileReader(readFile));
+    }
 
-                    while ((currentLine = br.readLine()) != null) {
-                        System.out.println(currentLine);
-                    }
-                    setPhrase(currentLine);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return 1;
+    /*Method to load cipher encoder into array*/
+
+    /**
+     * loadCipher - loads the specific file and converts the values contained inside to an array, with the exception of
+     *              the first value, this value will be used for the array size.
+     * @param file
+     */
+    private int loadCipher(File file) throws IOException {
+
+        ArrayList<Integer> cipher = new ArrayList<>();
+        String buffLine;
+        int matrixSize;
+
+        BufferedReader br = new BufferedReader(new FileReader(file));
+
+        //reads first line
+        matrixSize = Integer.parseInt(br.readLine());
+
+        while ((buffLine = br.readLine()) != null){
+            System.out.println(buffLine);
+
+            String[] tokens = buffLine.split("\\s");
+            for (int x = 0; x < tokens.length; x++){
+                cipher.add(Integer.parseInt(tokens[x]));
+                System.out.println(cipher.toString());
+            }
         }
-        return 0;
+
+        return matrixSize;
+        //System.out.println(matrixSize);
+
     }
 
-    //todo method that takes aggrigated values and does matrix multiplication
+    /*Method to do matrix multiplication*/
+    /*Method to display output*/
+    /*switch from integer to char representation based on Hill Cipher guidelines*/
 
-    //todo method that converts numerical values to their letter counterparts
-
-
-    public int[] getCipherCoderMatrix() {
-        return cipherCoderMatrix;
+    /**
+     * convertToInt - accepts String tokens and converts them to number representations of their number starting with
+     * a = 0, b = 1, etc...
+     * @param string
+     * @return
+     */
+    private int[] convertToInt(String string){
+        int[] number = new int[string.length()];
+        for(int x = 0; x < string.length(); x++){
+            number[x] = string.charAt(x) - 'a';
+        }
+        return number;
     }
 
-    public void setCipherCoderMatrix(int[] cipherCoderMatrix) {
-        this.cipherCoderMatrix = cipherCoderMatrix;
+    public String[] splitStringEvery(String s, int interval) {
+        int arrayLength = (int) Math.ceil(((s.length() / (double)interval)));
+        String[] result = new String[arrayLength];
+
+        int j = 0;
+        int lastIndex = result.length - 1;
+        for (int i = 0; i < lastIndex; i++) {
+            result[i] = s.substring(j, j + interval);
+            j += interval;
+        } //Add the last bit
+        result[lastIndex] = s.substring(j);
+
+        return result;
     }
 
-    public String getPhrase() {
-        return phrase;
-    }
-
-    public void setPhrase(String phrase) {
-        this.phrase = phrase;
-    }
 }
