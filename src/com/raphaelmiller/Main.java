@@ -2,7 +2,7 @@ package com.raphaelmiller;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class Main {
 
@@ -19,6 +19,8 @@ public class Main {
     static File testFile = new File("/home/raphael/IdeaProjects/Hill Cipher/test_cipher");
     static File testPhrase = new File("/home/raphael/IdeaProjects/Hill Cipher/keyphrase");
 
+    private ArrayList<Integer> matrixKey;
+
     private int[] cipherCoderMatrix;
     private String phrase;
 
@@ -31,22 +33,58 @@ public class Main {
                          {13,16,10},
                          {20,17,15}};
         int[] testb = {0,2,19};
+        int[] strNum;
 
         try {
-
+            //loads the hill key
             matrixSize = main.loadCipher(testFile);
+
+
+            //loads the key to be encoded and separates them into chunks based on the dimensions of the hill cipher
             phrase = main.loadString(testPhrase, matrixSize);
+            int[] matrixNum;
+            for (String aPhrase : phrase) {
+                //System.out.println(phrase[2]);
+                strNum = main.convertToInt(aPhrase);
+                System.out.println(Arrays.toString(strNum));
+                matrixNum = main.matrixMultipication(main.getMatrixKey(), strNum, matrixSize);
+                main.matrixIntToCharString(matrixNum);
+            }
+
+
+
 
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        int[] strNum = main.convertToInt("thebookisonthetable");
-        System.out.println(strNum[7]);
 
-        main.matrixMultipication(place, testb, 3);
 
+
+
+        //System.out.println(strNum[7]);
+
+
+    }
+
+
+    /**
+     * matrixIntToCharString - converts a int into a char representation of that number a = 0 to z = 25, then puts that
+     * data into a new string and returns that string.
+     * @param matrixNum
+     * @return StringBuilder
+     */
+    private StringBuilder matrixIntToCharString(int[] matrixNum) {
+
+        StringBuilder toEncodedMessage = new StringBuilder();
+
+        for(int x = 0; x < matrixNum.length; x++){
+            char charString = (char) (matrixNum[x] + 97);
+            toEncodedMessage.append(charString);
+        }
+
+        return toEncodedMessage;
     }
 
     /*Method to load files to String*/
@@ -87,17 +125,20 @@ public class Main {
         matrixSize = Integer.parseInt(br.readLine());
 
         while ((buffLine = br.readLine()) != null){
-            System.out.println(buffLine);
+            //System.out.println(buffLine);
 
             String[] tokens = buffLine.split("\\s");
             for (int x = 0; x < tokens.length; x++){
                 cipher.add(Integer.parseInt(tokens[x]));
-                System.out.println(cipher.toString());
-            }
-        }
 
-        return matrixSize;
+
+            }
+            //System.out.println(cipher);
+        }
+        setMatrixKey(cipher);
         //System.out.println(matrixSize);
+        return matrixSize;
+
 
     }
 
@@ -111,15 +152,24 @@ public class Main {
      * @param matrixSize
      * @return int[]
      */
-    private int[] matrixMultipication(int[][] aMatrix, int[] bMatrix, int matrixSize){
-        int[] result = new int[matrixSize];
+    private int[] matrixMultipication(ArrayList<Integer> aMatrix, int[] bMatrix, int matrixSize){
 
-            for (int y = 0; y < matrixSize; y++) {
-                for (int x = 0; x < matrixSize; x++) {
-                    result[y] = result[y] + (aMatrix[y][x] * bMatrix[x]);
-                    result[y] = result[y] % 26;
-                }
-            }
+
+        //todo fix matrix multiplication to return results... 
+
+        System.out.println(aMatrix.toString());
+        //System.out.println(bMatrix.length);
+        int[] result = new int[matrixSize];
+        int holder = 0;
+
+        for (int x = 0; x < bMatrix.length; x++) {
+            System.out.println(aMatrix.get(x) + " * " + bMatrix[x]);
+            holder = holder + (aMatrix.get(x) * bMatrix[x]);
+            holder = holder % 26;
+            System.out.println(holder);
+        }
+        result[0] = holder;
+        System.out.println(result[0]);
 
         return result;
     }
@@ -156,4 +206,11 @@ public class Main {
         return result;
     }
 
+    public ArrayList<Integer> getMatrixKey() {
+        return matrixKey;
+    }
+
+    public void setMatrixKey(ArrayList<Integer> matrixKey) {
+        this.matrixKey = matrixKey;
+    }
 }
