@@ -155,20 +155,27 @@ public class Main {
     private int[] matrixMultipication(ArrayList<Integer> aMatrix, int[] bMatrix, int matrixSize){
 
 
-        //todo fix matrix multiplication to return results... 
+        //todo fix matrix multiplication to return results...
 
         System.out.println(aMatrix.toString());
         //System.out.println(bMatrix.length);
         int[] result = new int[matrixSize];
-        int holder = 0;
+        int holder = 0, x = 0, y = 0;
 
-        for (int x = 0; x < bMatrix.length; x++) {
-            System.out.println(aMatrix.get(x) + " * " + bMatrix[x]);
-            holder = holder + (aMatrix.get(x) * bMatrix[x]);
-            holder = holder % 26;
-            System.out.println(holder);
+
+        while(x < aMatrix.size()){
+            System.out.println(aMatrix.get(x) + " * " + bMatrix[y]);
+            if(y < bMatrix.length - 1){
+                y++;
+            } else {
+                y = 0;
+            }
+            x++;
         }
+
+
         result[0] = holder;
+
         System.out.println(result[0]);
 
         return result;
