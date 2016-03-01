@@ -2,7 +2,6 @@ package com.raphaelmiller;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Main {
 
@@ -20,6 +19,7 @@ public class Main {
     static File testPhrase = new File("/home/raphael/IdeaProjects/Hill Cipher/keyphrase");
 
     private ArrayList<Integer> matrixKey;
+    private StringBuilder plaintextFile;
 
     private int[] cipherCoderMatrix;
     private String phrase;
@@ -27,13 +27,16 @@ public class Main {
     public static void main(String[] args) {
         Main main = new Main();
 
+        StringBuilder encodedMessage = new StringBuilder();
+
         String[] phrase = null;
         int matrixSize;
         int[][] place = {{6,24,1},
                          {13,16,10},
                          {20,17,15}};
         int[] testb = {0,2,19};
-        int[] strNum;
+        int[] messageToEncodeNum;
+
 
         try {
             //loads the hill key
@@ -43,15 +46,19 @@ public class Main {
             //loads the key to be encoded and separates them into chunks based on the dimensions of the hill cipher
             phrase = main.loadString(testPhrase, matrixSize);
             int[] matrixNum;
-            for (String aPhrase : phrase) {
+            for (String messageToEncodeAlpha : phrase) {
                 //System.out.println(phrase[2]);
-                strNum = main.convertToInt(aPhrase);
-                System.out.println(Arrays.toString(strNum));
-                matrixNum = main.matrixMultipication(main.getMatrixKey(), strNum, matrixSize);
-                main.matrixIntToCharString(matrixNum);
+                //System.out.println(messageToEncodeAlpha);
+
+                messageToEncodeNum = main.convertToInt(messageToEncodeAlpha);
+                //System.out.println(Arrays.toString(messageToEncodeNum));
+                matrixNum = main.matrixMultipication(main.getMatrixKey(), messageToEncodeNum, matrixSize);
+                encodedMessage.append(main.matrixIntToCharString(matrixNum));
+
             }
 
-
+            main.output(encodedMessage);
+            //System.out.println(encodedMessage.toString());
 
 
 
@@ -63,9 +70,15 @@ public class Main {
 
 
 
-        //System.out.println(strNum[7]);
+        //System.out.println(messageToEncodeNum[7]);
 
 
+    }
+
+    private void output(StringBuilder encodedMessage) {
+        System.out.println(getMatrixKey().toString());
+        System.out.println(getPlaintextFile().toString() + "\n");
+        System.out.println(encodedMessage);
     }
 
 
@@ -96,14 +109,13 @@ public class Main {
      *
      */
     private String[] loadString(File file, int matrixSize) throws IOException {
-
+        StringBuilder stringFile = new StringBuilder();
         String phrase;
         BufferedReader br = new BufferedReader(new FileReader(file));
         phrase = br.readLine();
+        setPlaintextFile(stringFile.append(phrase));
         String formattedPhrase = phrase.replaceAll("\\s", "");
         return splitStringEvery(formattedPhrase, matrixSize);
-
-
     }
 
     /*Method to load cipher encoder into array*/
@@ -157,14 +169,16 @@ public class Main {
 
         //todo fix matrix multiplication to return results...
 
-        System.out.println(aMatrix.toString());
+        //System.out.println(aMatrix.toString());
         //System.out.println(bMatrix.length);
-        int[] result = new int[matrixSize];
+        int[] result = new int[aMatrix.size()];
         int holder = 0, x = 0, y = 0;
+        int[] matrixTotal = new int[bMatrix.length];
 
-
+        //do matrix multiplication
         while(x < aMatrix.size()){
-            System.out.println(aMatrix.get(x) + " * " + bMatrix[y]);
+            //System.out.println(aMatrix.get(x) + " * " + bMatrix[y]);
+            result[x] = aMatrix.get(x) * bMatrix[y];
             if(y < bMatrix.length - 1){
                 y++;
             } else {
@@ -173,12 +187,22 @@ public class Main {
             x++;
         }
 
+        for(int p = 0; p < bMatrix.length; p++) {
+            for (int z = 0; z < bMatrix.length; z++) {
+                matrixTotal[p] = matrixTotal[p] + result[z + (bMatrix.length * p)];
+                //System.out.println(p + " = " + result[z + bMatrix.length * p] + " = " + matrixTotal[p]);
+            }
+            matrixTotal[p] = matrixTotal[p] % 26;
+            //System.out.println(matrixTotal[p]);
+        }
+
+
 
         result[0] = holder;
 
-        System.out.println(result[0]);
+        //System.out.println(result[0]);
 
-        return result;
+        return matrixTotal;
     }
 
     /*Method to display output*/
@@ -219,5 +243,13 @@ public class Main {
 
     public void setMatrixKey(ArrayList<Integer> matrixKey) {
         this.matrixKey = matrixKey;
+    }
+
+    public StringBuilder getPlaintextFile() {
+        return plaintextFile;
+    }
+
+    public void setPlaintextFile(StringBuilder plaintextFile) {
+        this.plaintextFile = plaintextFile;
     }
 }
