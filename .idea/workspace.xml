@@ -22,21 +22,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/raphaelmiller/Main.java">
+      <file leaf-file-name="HillCipher.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/raphaelmiller/HillCipher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.86133766">
-              <caret line="127" column="16" selection-start-line="127" selection-start-column="16" selection-end-line="127" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.588907">
+              <caret line="239" column="69" selection-start-line="239" selection-start-column="69" selection-end-line="239" selection-end-column="69" />
               <folding>
+                <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#7478#7479#0" expanded="true" />
-                <element signature="e#7510#7511#0" expanded="true" />
-                <element signature="e#7572#7573#0" expanded="true" />
-                <element signature="e#7614#7615#0" expanded="true" />
-                <element signature="e#7661#7662#0" expanded="true" />
-                <element signature="e#7697#7698#0" expanded="true" />
-                <element signature="e#7762#7763#0" expanded="true" />
-                <element signature="e#7812#7813#0" expanded="true" />
+                <element signature="e#8820#8821#0" expanded="true" />
+                <element signature="e#8852#8853#0" expanded="true" />
+                <element signature="e#8914#8915#0" expanded="true" />
+                <element signature="e#8956#8957#0" expanded="true" />
+                <element signature="e#9003#9004#0" expanded="true" />
+                <element signature="e#9039#9040#0" expanded="true" />
+                <element signature="e#9104#9105#0" expanded="true" />
+                <element signature="e#9154#9155#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -46,7 +47,7 @@
         <entry file="file://$PROJECT_DIR$/keyphrase">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="53" selection-start-line="0" selection-start-column="53" selection-end-line="0" selection-end-column="53" />
+              <caret line="0" column="65" selection-start-line="0" selection-start-column="65" selection-end-line="0" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -56,7 +57,7 @@
         <entry file="file://$PROJECT_DIR$/test_cipher">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -73,9 +74,10 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/test cipher" />
-        <option value="$PROJECT_DIR$/keyphrase" />
         <option value="$PROJECT_DIR$/test_cipher" />
+        <option value="$PROJECT_DIR$/keyphrase" />
         <option value="$PROJECT_DIR$/src/com/raphaelmiller/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/raphaelmiller/HillCipher.java" />
       </list>
     </option>
   </component>
@@ -134,10 +136,13 @@
       <pane id="PackagesPane" />
     </panes>
   </component>
+  <component name="PropertiesComponent">
+    <property name="last.edited.regexp" value="" />
+  </component>
   <component name="RunManager" selected="Application.Main">
     <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="com.raphaelmiller.Main" />
+      <option name="MAIN_CLASS_NAME" value="com.raphaelmiller.HillCipher" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="file://$PROJECT_DIR$/test_cipher" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -453,20 +458,21 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/raphaelmiller/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/com/raphaelmiller/HillCipher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#7478#7479#0" expanded="true" />
-            <element signature="e#7510#7511#0" expanded="true" />
-            <element signature="e#7572#7573#0" expanded="true" />
-            <element signature="e#7614#7615#0" expanded="true" />
-            <element signature="e#7661#7662#0" expanded="true" />
-            <element signature="e#7697#7698#0" expanded="true" />
-            <element signature="e#7762#7763#0" expanded="true" />
-            <element signature="e#7812#7813#0" expanded="true" />
+            <element signature="e#8820#8821#0" expanded="true" />
+            <element signature="e#8852#8853#0" expanded="true" />
+            <element signature="e#8914#8915#0" expanded="true" />
+            <element signature="e#8956#8957#0" expanded="true" />
+            <element signature="e#9003#9004#0" expanded="true" />
+            <element signature="e#9039#9040#0" expanded="true" />
+            <element signature="e#9104#9105#0" expanded="true" />
+            <element signature="e#9154#9155#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -515,20 +521,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/raphaelmiller/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/com/raphaelmiller/HillCipher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#7478#7479#0" expanded="true" />
-            <element signature="e#7510#7511#0" expanded="true" />
-            <element signature="e#7572#7573#0" expanded="true" />
-            <element signature="e#7614#7615#0" expanded="true" />
-            <element signature="e#7661#7662#0" expanded="true" />
-            <element signature="e#7697#7698#0" expanded="true" />
-            <element signature="e#7762#7763#0" expanded="true" />
-            <element signature="e#7812#7813#0" expanded="true" />
+            <element signature="e#8820#8821#0" expanded="true" />
+            <element signature="e#8852#8853#0" expanded="true" />
+            <element signature="e#8914#8915#0" expanded="true" />
+            <element signature="e#8956#8957#0" expanded="true" />
+            <element signature="e#9003#9004#0" expanded="true" />
+            <element signature="e#9039#9040#0" expanded="true" />
+            <element signature="e#9104#9105#0" expanded="true" />
+            <element signature="e#9154#9155#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -557,20 +564,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/raphaelmiller/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/com/raphaelmiller/HillCipher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#7478#7479#0" expanded="true" />
-            <element signature="e#7510#7511#0" expanded="true" />
-            <element signature="e#7572#7573#0" expanded="true" />
-            <element signature="e#7614#7615#0" expanded="true" />
-            <element signature="e#7661#7662#0" expanded="true" />
-            <element signature="e#7697#7698#0" expanded="true" />
-            <element signature="e#7762#7763#0" expanded="true" />
-            <element signature="e#7812#7813#0" expanded="true" />
+            <element signature="e#8820#8821#0" expanded="true" />
+            <element signature="e#8852#8853#0" expanded="true" />
+            <element signature="e#8914#8915#0" expanded="true" />
+            <element signature="e#8956#8957#0" expanded="true" />
+            <element signature="e#9003#9004#0" expanded="true" />
+            <element signature="e#9039#9040#0" expanded="true" />
+            <element signature="e#9104#9105#0" expanded="true" />
+            <element signature="e#9154#9155#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -635,36 +643,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test_cipher">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/keyphrase">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="53" selection-start-line="0" selection-start-column="53" selection-end-line="0" selection-end-column="53" />
+          <caret line="0" column="65" selection-start-line="0" selection-start-column="65" selection-end-line="0" selection-end-column="65" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/raphaelmiller/Main.java">
+    <entry file="file://$PROJECT_DIR$/test_cipher">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.86133766">
-          <caret line="127" column="16" selection-start-line="127" selection-start-column="16" selection-end-line="127" selection-end-column="16" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/raphaelmiller/HillCipher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.588907">
+          <caret line="239" column="69" selection-start-line="239" selection-start-column="69" selection-end-line="239" selection-end-column="69" />
           <folding>
+            <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#7478#7479#0" expanded="true" />
-            <element signature="e#7510#7511#0" expanded="true" />
-            <element signature="e#7572#7573#0" expanded="true" />
-            <element signature="e#7614#7615#0" expanded="true" />
-            <element signature="e#7661#7662#0" expanded="true" />
-            <element signature="e#7697#7698#0" expanded="true" />
-            <element signature="e#7762#7763#0" expanded="true" />
-            <element signature="e#7812#7813#0" expanded="true" />
+            <element signature="e#8820#8821#0" expanded="true" />
+            <element signature="e#8852#8853#0" expanded="true" />
+            <element signature="e#8914#8915#0" expanded="true" />
+            <element signature="e#8956#8957#0" expanded="true" />
+            <element signature="e#9003#9004#0" expanded="true" />
+            <element signature="e#9039#9040#0" expanded="true" />
+            <element signature="e#9104#9105#0" expanded="true" />
+            <element signature="e#9154#9155#0" expanded="true" />
           </folding>
         </state>
       </provider>
